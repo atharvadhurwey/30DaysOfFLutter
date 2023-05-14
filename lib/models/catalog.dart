@@ -2,6 +2,12 @@ import 'dart:convert';
 
 class CatalogModel {
   static List<Item>? items;
+
+  //get item id
+  static Item getById(int id) =>
+      items!.firstWhere((element) => element.id == id);
+
+  static Item getByPosition(int pos)=>items![pos];
 }
 
 class Item {
@@ -51,7 +57,6 @@ class Item {
   }
 
   factory Item.fromMap(Map<String, dynamic> map) {
-
     return Item(
       id: map['id'],
       name: map['name'],
