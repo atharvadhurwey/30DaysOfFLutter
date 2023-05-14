@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tutorial/utils/route.dart';
+import 'package:flutter_catalog/utils/routes.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
-
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
@@ -16,7 +14,7 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
 
   moveToHome(BuildContext context) async {
-    if (_formKey.currentState!.validate()) {
+    if (_formKey.currentState.validate()) {
       setState(() {
         changeButton = true;
       });
@@ -38,11 +36,11 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               children: [
                 Image.asset(
-                  "assets/images/welcome_screen.png",
+                  "assets/images/hey.png",
                   fit: BoxFit.cover,
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 20.0,
                 ),
                 Text(
                   "Welcome $name",
@@ -52,11 +50,11 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 20.0,
                 ),
                 Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 16.0, horizontal: 32.0),
                   child: Column(
                     children: [
                       TextFormField(
@@ -65,9 +63,10 @@ class _LoginPageState extends State<LoginPage> {
                           labelText: "Username",
                         ),
                         validator: (value) {
-                          if (value!.isEmpty) {
-                            return "username cannot be empty";
+                          if (value.isEmpty) {
+                            return "Username cannot be empty";
                           }
+
                           return null;
                         },
                         onChanged: (value) {
@@ -82,27 +81,28 @@ class _LoginPageState extends State<LoginPage> {
                           labelText: "Password",
                         ),
                         validator: (value) {
-                          if (value!.isEmpty) {
-                            return "username cannot be empty";
+                          if (value.isEmpty) {
+                            return "Password cannot be empty";
                           } else if (value.length < 6) {
-                            return "password length should be atlease 6 characters";
+                            return "Password length should be atleast 6";
                           }
+
                           return null;
                         },
                       ),
                       SizedBox(
-                        height: 40,
+                        height: 40.0,
                       ),
                       Material(
                         color: context.theme.buttonColor,
                         borderRadius:
-                            BorderRadius.circular(changeButton ? 50 : 7),
+                            BorderRadius.circular(changeButton ? 50 : 8),
                         child: InkWell(
                           onTap: () => moveToHome(context),
                           child: AnimatedContainer(
                             duration: Duration(seconds: 1),
-                            height: 50,
                             width: changeButton ? 50 : 150,
+                            height: 50,
                             alignment: Alignment.center,
                             child: changeButton
                                 ? Icon(
@@ -110,18 +110,18 @@ class _LoginPageState extends State<LoginPage> {
                                     color: Colors.white,
                                   )
                                 : Text(
-                                    "LOGIN",
+                                    "Login",
                                     style: TextStyle(
                                         color: Colors.white,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18),
                                   ),
                           ),
                         ),
                       ),
                     ],
                   ),
-                ),
+                )
               ],
             ),
           ),

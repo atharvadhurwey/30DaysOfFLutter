@@ -1,13 +1,20 @@
 import 'dart:convert';
 
 class CatalogModel {
-  static List<Item>? items;
+  static final catModel = CatalogModel._internal();
 
-  //get item id
+  CatalogModel._internal();
+
+  factory CatalogModel() => catModel;
+
+  static List<Item> items;
+
+  // Get Item by ID
   Item getById(int id) =>
-      items!.firstWhere((element) => element.id == id);
+      items.firstWhere((element) => element.id == id, orElse: null);
 
-  Item getByPosition(int pos)=>items![pos];
+  // Get Item by position
+  Item getByPosition(int pos) => items[pos];
 }
 
 class Item {
@@ -19,29 +26,29 @@ class Item {
   final String image;
 
   Item({
-    required this.id,
-    required this.name,
-    required this.desc,
-    required this.price,
-    required this.color,
-    required this.image,
+    this.id,
+    this.name,
+    this.desc,
+    this.price,
+    this.color,
+    this.image,
   });
 
   Item copyWith({
-    required int id,
-    required String name,
-    required String desc,
-    required num price,
-    required String color,
-    required String image,
+    int id,
+    String name,
+    String desc,
+    num price,
+    String color,
+    String image,
   }) {
     return Item(
-      id: id,
-      name: name,
-      desc: desc,
-      price: price,
-      color: color,
-      image: image,
+      id: id ?? this.id,
+      name: name ?? this.name,
+      desc: desc ?? this.desc,
+      price: price ?? this.price,
+      color: color ?? this.color,
+      image: image ?? this.image,
     );
   }
 
@@ -57,6 +64,8 @@ class Item {
   }
 
   factory Item.fromMap(Map<String, dynamic> map) {
+    if (map == null) return null;
+
     return Item(
       id: map['id'],
       name: map['name'],
