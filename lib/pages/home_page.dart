@@ -17,7 +17,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final url = "https://api.jsonbin.io/v3/b/64618d1d8e4aa6225e9d1364";
+  final url = "https://api.npoint.io/c715133f222244fa2d4a";
 
   @override
   void initState() {
@@ -27,11 +27,11 @@ class _HomePageState extends State<HomePage> {
 
   loadData() async {
     await Future.delayed(Duration(seconds: 2));
-    final catalogJson =
-        await rootBundle.loadString("assets/files/catalog.json");
+    // final catalogJson =
+    //     await rootBundle.loadString("assets/files/catalog.json");
 
-    // final response = await http.get(Uri.parse(url));
-    // final catalogJson = response.body;
+    final response = await http.get(Uri.parse(url));
+    final catalogJson = response.body;
     final decodedData = jsonDecode(catalogJson);
     var productsData = decodedData["products"];
     CatalogModel.items = List.from(productsData)
